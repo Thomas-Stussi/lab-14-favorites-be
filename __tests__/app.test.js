@@ -7,10 +7,10 @@ const app = require('../lib/app');
 const client = require('../lib/client');
 
 describe('app routes', () => {
-  const fireball = {
-    name: 'Fireball',
+  const testSpell = {
+    name: 'testSpell',
     level: 3,
-    desc: 'A bright streak flashes from your pointing finger to a point you choose within range and then blossoms with a low roar into an explosion of flame. Each creature in a 20-foot-radius sphere centered on that point must make a dexterity saving throw. A target takes 8d6 fire damage on a failed save, or half as much damage on a successful one. The fire spreads around corners. It ignites flammable objects in the area that aren\'t being worn or carried.',
+    description: 'test',
   };
 
   let token;
@@ -20,14 +20,14 @@ describe('app routes', () => {
 
     client.connect();
 
-    // const signInData = await fakeRequest(app)
-    //   .post('/auth/signup')
-    //   .send({
-    //     email: 'jon@user.com',
-    //     password: '1234'
-    //   });
+    const signInData = await fakeRequest(app)
+      .post('/auth/signup')
+      .send({
+        email: 'jon@user.com',
+        password: '1234'
+      });
     
-    // token = signInData.body.token;
+    token = signInData.body.token;
 
     return done();
   });
@@ -80,61 +80,61 @@ describe('app routes', () => {
   });
 
 
-  // test('creates a new favorite on POST', async(done) => {
-  //   const expectation = {
-  //     ...fireball,
-  //     id: 4,
-  //     user_id: 2
-  //   };
+  test('creates a new favorite on POST', async(done) => {
+    const expectation = {
+      ...testSpell,
+      id: 4,
+      user_id: 2
+    };
 
-  //   const data = await fakeRequest(app)
-  //     .post('/api/favorites')
-  //     .set('Authorization', token)
-  //     .send(fireball)
-  //     .expect('Content-Type', /json/)
-  //     .expect(200);
+    const data = await fakeRequest(app)
+      .post('/api/favorites')
+      .set('Authorization', token)
+      .send(testSpell)
+      .expect('Content-Type', /json/)
+      .expect(200);
 
-  //   expect(data.body).toEqual(expectation);
+    expect(data.body).toEqual(expectation);
 
-  //   done();
-  // });
+    done();
+  });
 
-  // test('gets all favorites for a user on GET', async(done) => {
-  //   const expectation = [{
-  //     ...fireball,
-  //     id: 4,
-  //     user_id: 2
-  //   }];
+  test('gets all favorites for a user on GET', async(done) => {
+    const expectation = [{
+      ...testSpell,
+      id: 4,
+      user_id: 2
+    }];
 
-  //   const data = await fakeRequest(app)
-  //     .get('/api/favorites')
-  //     .set('Authorization', token)
-  //     .expect('Content-Type', /json/)
-  //     .expect(200);
+    const data = await fakeRequest(app)
+      .get('/api/favorites')
+      .set('Authorization', token)
+      .expect('Content-Type', /json/)
+      .expect(200);
 
-  //   expect(data.body).toEqual(expectation);
+    expect(data.body).toEqual(expectation);
 
-  //   done();
-  // });
+    done();
+  });
 
-  // test('deletes a favorite on DELETE', async(done) => {
-  //   const expectation = [];
+  test('deletes a favorite on DELETE', async(done) => {
+    const expectation = [];
 
-  //   await fakeRequest(app)
-  //     .delete('/api/favorites/4')
-  //     .set('Authorization', token)
-  //     .expect('Content-Type', /json/)
-  //     .expect(200);
+    await fakeRequest(app)
+      .delete('/api/favorites/4')
+      .set('Authorization', token)
+      .expect('Content-Type', /json/)
+      .expect(200);
 
-  //   const data = await fakeRequest(app)
-  //     .get('/api/favorites')
-  //     .set('Authorization', token)
-  //     .expect('Content-Type', /json/)
-  //     .expect(200);
+    const data = await fakeRequest(app)
+      .get('/api/favorites')
+      .set('Authorization', token)
+      .expect('Content-Type', /json/)
+      .expect(200);
 
-  //   // when i fetch all favorites for this user, i expect it now to be empty
-  //   expect(data.body).toEqual(expectation);
+    // when i fetch all favorites for this user, i expect it now to be empty
+    expect(data.body).toEqual(expectation);
 
-  //   done();
-  // });
+    done();
+  });
 });

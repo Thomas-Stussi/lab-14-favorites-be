@@ -27,13 +27,12 @@ async function run() {
     await Promise.all(
       favorites.map(favorite => {
         return client.query(`
-                    INSERT INTO favorites (name, level, desc, owner_id)
+                    INSERT INTO favorites (name, level, description, user_id)
                     VALUES ($1, $2, $3, $4);
                 `,
-        [favorite.name, favorite.level, favorite.desc, favorite.index, user.id]);
+        [favorite.name, favorite.level, favorite.description, user.id]);
       })
     );
-    
 
     console.log('seed data load complete', getEmoji(), getEmoji(), getEmoji());
   }
