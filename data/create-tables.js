@@ -22,6 +22,7 @@ async function run() {
                     name VARCHAR(512) NOT NULL,
                     level INTEGER NOT NULL,
                     desc VARCHAR(2000) NOT NULL,
+                    index VARCHAR(256) NOT NULL,
                     user_id INTEGER NOT NULL REFERENCES users(id)
             );
         `);

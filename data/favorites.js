@@ -1,7 +1,7 @@
 module.exports = [
   {
-    name: 'Fireball',
-    level: 3,
+    name: 'Magic Missile',
+    level: 1,
     desc: 'this go big boom',
   },
   {
