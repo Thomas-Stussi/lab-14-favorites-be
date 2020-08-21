@@ -9,7 +9,7 @@ const client = require('../lib/client');
 describe('app routes', () => {
   const testSpell = {
     name: 'testSpell',
-    level: 3,
+    level: '3',
     description: 'test',
   };
 
